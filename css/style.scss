@@ -18,10 +18,6 @@ body {
     font-family: 'Rubik', sans-serif;
     font-size: 18px;
     min-height: 100vh;
-
-    // margin: 4.5em 1.5em 1em;
-    // display: flex;
-    // flex-direction: column;
 }
 
 h1 {
@@ -74,7 +70,7 @@ LAYOUT
     background: url(../images/pattern-bg.png) no-repeat;
     background-size: cover;
     background-position: center;
-    height: 40vh;
+    height: 35vh;
 
     padding: 2em;
 
@@ -91,20 +87,17 @@ LAYOUT
         height: $results-box-height;
         background-color: #fff;
         border-radius: 10px;
-        // padding: 1.5em;
         bottom: -($results-box-height / 2);
         left: 50%;
         margin-left: -($results-box-width / 2);
 
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
 
         $div-margin: 1.5em;
         div {
-            width: 25%;
-            text-align: left;
-            border-right: 1px solid $dark-gray;
-            margin: $div-margin 0 $div-margin;
+            text-align: center;
+            margin: $div-margin 0 0;
             padding: 0 $div-margin;
 
             h2 {
@@ -125,14 +118,13 @@ LAYOUT
             }
             &:last-child {
                 padding-right: $div-margin;
-                border-right: 0;
             }
         }
     }
 }
 
 #mapid {
-    height: 60vh;
+    height: 65vh;
 }
 
 footer {
@@ -167,16 +159,31 @@ DESKTOP
     }
 
     .container {
-        height: 30vh;
+        height: 25vh;
 
         $results-box-height: 100px;
         main.results {
             height: $results-box-height;
             bottom: -($results-box-height / 2);
+
+            flex-direction: row;
+            justify-content: space-between;
+
+            $div-margin: 1.5em;
+            div {
+                width: 25%;
+                text-align: left;
+                border-right: 1px solid $dark-gray;
+                margin-bottom: $div-margin;
+
+                &:last-child {
+                    border-right: 0;
+                }
+            }
         }
     }
 
     #mapid {
-        height: 70vh;
+        height: 75vh;
     }
 }
