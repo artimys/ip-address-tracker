@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+
+// Primary colors
+$very-dark-gray: hsl(0, 0, 17%);
+$dark-gray: hsl(0, 0, 59%);
+
+/*==========
+DEFAULTS
+=========*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    min-height: 100vh;
+
+    // margin: 4.5em 1.5em 1em;
+    // display: flex;
+    // flex-direction: column;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #fff;
+}
+
+.search-component {
+    display: flex;
+    margin: 1em auto 0;
+
+    input[type="text"],
+    button {
+        border: 1px solid $very-dark-gray;
+        border-radius: 10px;
+        padding: 1em 1.5em;
+    }
+
+    input[type="text"] {
+        flex-grow: 1;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        font-size: 0.8rem;
+        color: $very-dark-gray;
+        &::placeholder {
+            color: $dark-gray;
+        }
+    }
+
+    button {
+        background-color: #000;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $very-dark-gray;
+        }
+    }
+}
+
+
+/*==========
+LAYOUT
+=========*/
+
+.container {
+    position: relative;
+    background: url(../images/pattern-bg.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 40vh;
+
+    padding: 2em;
+
+    header {
+        text-align: center;
+    }
+
+    $results-box-width: 82%;
+    $results-box-height: 100%;
+    main.results {
+        position: absolute;
+        z-index: 666;
+        width: $results-box-width;
+        height: $results-box-height;
+        background-color: #fff;
+        border-radius: 10px;
+        // padding: 1.5em;
+        bottom: -($results-box-height / 2);
+        left: 50%;
+        margin-left: -($results-box-width / 2);
+
+        display: flex;
+        justify-content: space-between;
+
+        $div-margin: 1.5em;
+        div {
+            width: 25%;
+            text-align: left;
+            border-right: 1px solid $dark-gray;
+            margin: $div-margin 0 $div-margin;
+            padding: 0 $div-margin;
+
+            h2 {
+                font-size: 0.7rem;
+                font-weight: 700;
+                letter-spacing: 0.1rem;
+                color: $dark-gray;
+                text-transform: uppercase;
+            }
+            p {
+                padding-top: 10px;
+                font-size: 1.4rem;
+                font-weight: 500;
+            }
+
+            &:first-child {
+                padding-left: $div-margin;
+            }
+            &:last-child {
+                padding-right: $div-margin;
+                border-right: 0;
+            }
+        }
+    }
+}
+
+#mapid {
+    height: 60vh;
+}
+
+footer {
+    display: none;
+}
+
+
+
+
+/*==========
+DESKTOP
+=========*/
+
+@media only screen and (min-width: 900px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .search-component {
+        width: 40%;
+
+        input[type="text"] {
+            font-size: 1rem;
+        }
+    }
+
+    .container {
+        height: 30vh;
+
+        $results-box-height: 100px;
+        main.results {
+            height: $results-box-height;
+            bottom: -($results-box-height / 2);
+        }
+    }
+
+    #mapid {
+        height: 70vh;
+    }
+}
