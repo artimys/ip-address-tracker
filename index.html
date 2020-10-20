@@ -24,45 +24,48 @@
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1>IP Address Tracker</h1>
+  <header>
+    <h1>IP Address Tracker</h1>
 
-      <form novalidate>
-        <div class="search-component">
-          <input type="text" id="search"
-                            name="search"
-                            value="8.8.8.8"
-                            placeholder="Search for any IP address or domain"
-                            autocomplete="off"
-                            aria-label="Search for any IP address or domain">
-          <button type="button">
-            <img alt="Submit" src="images/icon-arrow.svg" />
-          </button>
-        </div>
-      </form>
-    </header>
+    <form novalidate>
+      <div class="search-bar">
+        <input type="text" id="search"
+                          class="search-bar__input"
+                          name="search"
+                          value="8.8.8.8"
+                          placeholder="Search for any IP address or domain"
+                          autocomplete="off"
+                          aria-label="Search for any IP address or domain">
+        <button type="button" class="search-bar__button">
+          <img alt="Submit" src="images/icon-arrow.svg" />
+        </button>
+      </div>
+    </form>
 
-    <main class="results">
-      <div>
-        <h2>IP Address</h2>
-        <p id="ipAddress" aria-label="IP Address">-</p>
-      </div>
-      <div>
-        <h2>Location</h2>
-        <p id="location" aria-label="Location">-</p>
-      </div>
-      <div>
-        <h2>Timezone</h2>
-        <p id="timezone" aria-label="Timezone">-</p>
-      </div>
-      <div>
-        <h2>ISP</h2>
+  </header>
+
+
+  <main class="results">
+    <ul class="result-card">
+      <li class="result-card__item">
+        <h2 class="result-card__title">IP Address</h2>
+        <p class="result-card__value" id="ipAddress" aria-label="IP Address">-</p>
+      </li>
+      <li class="result-card__item">
+        <h2 class="result-card__title">Location</h2>
+        <p class="result-card__value" id="location" aria-label="Location">-</p>
+      </li>
+      <li class="result-card__item">
+        <h2 class="result-card__title">Timezone</h2>
+        <p class="result-card__value" id="timezone" aria-label="Timezone">-</p>
+      </li>
+      <li class="result-card__item">
+        <h2 class="result-card__title">ISP</h2>
         <!-- UTC add offset value dynamically using the API -->
-        <p id="isp" aria-label="Internet Service Provider">-</p>
-      </div>
-    </main>
-  </div>
+        <p class="result-card__value" id="isp" aria-label="Internet Service Provider">-</p>
+      </li>
+    </ul>
+  </main>
 
 
   <div id="mapid"></div>

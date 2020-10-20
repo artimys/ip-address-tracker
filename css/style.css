@@ -19,23 +19,26 @@ h1 {
   font-size: 1.5rem;
   font-weight: 400;
   color: #fff;
+  text-align: center;
 }
 
-.search-component {
+/*==========
+COMPONENTS
+=========*/
+.search-bar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 1em auto 0;
+  margin: 1em 2em;
 }
 
-.search-component input[type="text"],
-.search-component button {
+.search-bar__input, .search-bar__button {
   border: 1px solid #2b2b2b;
   border-radius: 10px;
   padding: 1em 1.5em;
 }
 
-.search-component input[type="text"] {
+.search-bar__input {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -45,59 +48,35 @@ h1 {
   color: #2b2b2b;
 }
 
-.search-component input[type="text"]::-webkit-input-placeholder {
+.search-bar__input::-webkit-input-placeholder {
   color: #969696;
 }
 
-.search-component input[type="text"]:-ms-input-placeholder {
+.search-bar__input:-ms-input-placeholder {
   color: #969696;
 }
 
-.search-component input[type="text"]::-ms-input-placeholder {
+.search-bar__input::-ms-input-placeholder {
   color: #969696;
 }
 
-.search-component input[type="text"]::placeholder {
+.search-bar__input::placeholder {
   color: #969696;
 }
 
-.search-component button {
+.search-bar__button {
   background-color: #000;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   cursor: pointer;
 }
 
-.search-component button:hover {
+.search-bar__button:hover {
   background-color: #2b2b2b;
 }
 
-/*==========
-LAYOUT
-=========*/
-.container {
-  position: relative;
-  background: url(../images/pattern-bg.png) no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 35vh;
-  padding: 2em;
-}
-
-.container header {
-  text-align: center;
-}
-
-.container main.results {
-  position: absolute;
-  z-index: 666;
-  width: 82%;
-  height: 100%;
-  background-color: #fff;
+.result-card {
   border-radius: 10px;
-  bottom: -50%;
-  left: 50%;
-  margin-left: -41%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -107,36 +86,66 @@ LAYOUT
           flex-direction: column;
 }
 
-.container main.results div {
+.result-card__item {
   text-align: center;
   margin: 1.5em 0 0;
   padding: 0 1.5em;
 }
 
-.container main.results div h2 {
-  font-size: 0.7rem;
+.result-card__item:last-child {
+  margin-bottom: 1.5em;
+}
+
+.result-card__title {
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.1rem;
   color: #969696;
   text-transform: uppercase;
 }
 
-.container main.results div p {
+.result-card__value {
   padding-top: 10px;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 500;
 }
 
-.container main.results div:first-child {
-  padding-left: 1.5em;
+/*==========
+LAYOUT
+=========*/
+header {
+  background: url(../images/pattern-bg.png) no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 200px;
+  height: 25vh;
 }
 
-.container main.results div:last-child {
-  padding-right: 1.5em;
+header h1 {
+  padding-top: 1em;
+}
+
+main.results {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main.results ul {
+  z-index: 666;
+  position: absolute;
+  top: -65px;
+  list-style: none;
+  background-color: #fff;
+  width: 80%;
 }
 
 #mapid {
-  height: 65vh;
+  height: 75vh;
 }
 
 footer {
@@ -157,18 +166,21 @@ DESKTOP
   h1 {
     font-size: 1.8rem;
   }
-  .search-component {
+  form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  form .search-bar {
     width: 40%;
   }
-  .search-component input[type="text"] {
+  form .search-bar__input {
     font-size: 1rem;
   }
-  .container {
-    height: 25vh;
-  }
-  .container main.results {
-    height: 100px;
-    bottom: -50px;
+  .result-card {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
@@ -177,17 +189,23 @@ DESKTOP
         -ms-flex-pack: justify;
             justify-content: space-between;
   }
-  .container main.results div {
+  .result-card__item {
     width: 25%;
     text-align: left;
     border-right: 1px solid #969696;
     margin-bottom: 1.5em;
   }
-  .container main.results div:last-child {
+  .result-card__item:last-child {
     border-right: 0;
   }
-  #mapid {
-    height: 75vh;
+  .result-card__title {
+    font-size: 0.7rem;
+  }
+  .result-card__value {
+    font-size: 1.4rem;
+  }
+  main.results ul {
+    top: -50px;
   }
 }
 /*# sourceMappingURL=style.css.map */
