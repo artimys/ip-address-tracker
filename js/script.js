@@ -5,7 +5,6 @@
 const searchForm = document.querySelector("form");
 const searchButton = document.querySelector("button");
 const searchInput = document.querySelector("#search");
-const divResults = document.querySelector(".results");
 
 
 
@@ -13,21 +12,18 @@ const divResults = document.querySelector(".results");
  * SETUP LEAFLET MAP
  * *****************************************/
 
-const defaultLat = 43.732249;
-const defaultLong = 7.413752;
-
 // Store marker object when adding/removing from map
 let customMarker;
 
 // Create custom icon for marker
 let blackLocationMarker = L.icon({
     iconUrl: 'images/icon-location.svg',
-    iconSize:     [46, 56], // size of the icon
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    iconSize:     [46, 56],
+    iconAnchor:   [22, 94],
 });
 
 // Create the map
-let mymap = L.map('mapid', { zoomControl: false }).setView([defaultLat, defaultLong], 80);
+let mymap = L.map('mapid', { zoomControl: false }).setView([43.732249, 7.413752], 80);
 
 // Set the map tiles from Mapbox
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -81,6 +77,7 @@ function validDomain(value) {
 }
 
 
+
 /*******************************************
  * TRIGGER IPIFY API AND DISPLAY RESULTS TO PAGE
  * *****************************************/
@@ -92,42 +89,58 @@ function callIPifyAPI(value, searchType = "ip") {
     }
 
     fetch("https://geo.ipify.org/api/v1?apiKey=at_C92aBZ9a4WqwVYqDlf48yJIFglSNe&" + searchQuery)
-        .then(function(response) {
+        .then(response => {
             if (!response.ok) {
                 throw response.statusText;
             }
             return response.json();
         })
-        .then(function(data) {
-            displayResults(JSON.stringify(data))
+        .then(data => {
+            let lng = data.location.lng;
+            let lat = data.location.lat;
+
+            // Render data to the appropriate label
+            document.querySelector("#ipAddress").innerHTML = data.ip;
+            document.querySelector("#location").innerHTML = data.location.city + ", " + data.location.region + " " + data.location.postalCode;
+            document.querySelector("#timezone").innerHTML = data.location.timezone;
+            document.querySelector("#isp").innerHTML = data.isp;
+
+            // Move map to new location using lat, long coordinates
+            mymap.setView([lat, lng], 80);
+            // CustomMarker will be undefined at first page load
+            if (customMarker != null) {
+                // Remove marker from map
+                customMarker.remove();
+            }
+            // Create custom marker and store it for later use.
+            // Note: if more than one marker on map, consider a LayerGroup to manage all (mymap.addLayer(customMarker);)
+            customMarker = new L.Marker([lat, lng], {icon: blackLocationMarker});
+            // Add marker to map
+            customMarker.addTo(mymap);
         });
 }
 
-let displayResults = function(jsonStringData) {
-    let objResults = JSON.parse(jsonStringData);
-    let lng = objResults["location"]["lng"];
-    let lat = objResults["location"]["lat"];
 
-    // Render data to the appropriate label
-    document.querySelector("#ipAddress").innerHTML = objResults["ip"];
-    document.querySelector("#location").innerHTML = objResults["location"]["city"] + ", " + objResults["location"]["region"] + " " + objResults["location"]["postalCode"];
-    document.querySelector("#timezone").innerHTML = objResults["location"]["timezone"];
-    document.querySelector("#isp").innerHTML = objResults["isp"];
 
-    // Move map to new location using lat, long coordinates
-    console.info("Lat:", lat, "Long:", lng);
-    mymap.setView([lat, lng], 80);
+/*******************************************
+ * GRABBING IP ADDRESS WITH USER'S PERMISSION
+ * USING GEOLOCATION API
+ * *****************************************/
 
-    // CustomMarker will be undefined at first page load
-    if (customMarker != null) {
-        // mymap.removeLayer(customMarker);
-        // Remove marker from map
-        customMarker.remove();
-    }
+function userLocationGranted(position) {
+    // let lat = position.coords.latitude;
+    // let lng = position.coords.longitude;
 
-    // Create custom marker and store it for later use.
-    // Note: if more than one marker on map, consider a LayerGroup to manage all (mymap.addLayer(customMarker);)
-    customMarker = new L.Marker([lat, lng], {icon: blackLocationMarker});
-    // Add marker to map
-    customMarker.addTo(mymap);
+   fetch("https://api.ipify.org?format=json")
+        .then(response => {
+            if (!response.ok) {
+                throw response.statusText;
+            }
+            return response.json();
+        })
+        .then(data => {
+            searchInput.value = data.ip;
+            callIPifyAPI(data.ip);
+        });
 }
+navigator.geolocation.getCurrentPosition(userLocationGranted);
