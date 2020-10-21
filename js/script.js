@@ -120,7 +120,11 @@ function callIPifyAPI(value, searchType = "ip") {
             customMarker = new L.Marker([lat, lng], {icon: blackLocationMarker});
             // Add marker to map
             customMarker.addTo(mymap);
+        })
+        .catch(error => {
+            alert("Something went wrong\n" + error);
         });
+
 }
 
 
@@ -144,6 +148,9 @@ function userLocationGranted(position) {
         .then(data => {
             // searchInput.value = data.ip;
             callIPifyAPI(data.ip);
+        })
+        .catch(error => {
+            alert("Something went wrong\n" + error);
         });
 }
 navigator.geolocation.getCurrentPosition(userLocationGranted);
