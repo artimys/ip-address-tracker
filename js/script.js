@@ -135,7 +135,7 @@ function callIPifyAPI(value, searchType = "ip") {
  * USING GEOLOCATION API
  * *****************************************/
 
-function userLocationGranted(position) {
+function userLocationGranted() {
     // let lat = position.coords.latitude;
     // let lng = position.coords.longitude;
 
@@ -154,4 +154,6 @@ function userLocationGranted(position) {
             alert("Something went wrong\n" + error);
         });
 }
-navigator.geolocation.getCurrentPosition(userLocationGranted);
+// navigator.geolocation.getCurrentPosition(userLocationGranted);
+
+userLocationGranted()
