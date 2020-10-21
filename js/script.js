@@ -32,12 +32,13 @@ let mymap = L.map('mapid', {
     zoomControl: false,
 	layers: [streets]
 }).setView([41.145767, -98.439308], 4);
+
 // Add the base maps as layers
 L.control.layers({
     "Grayscale": grayscale,
     "Streets": streets,
     "Satellite": satellite
-}).addTo(mymap);
+}, "", { position: "bottomright"}).addTo(mymap);
 
 
 
