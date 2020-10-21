@@ -31,7 +31,7 @@ let blackLocationMarker = L.icon({
 let mymap = L.map('mapid', {
     zoomControl: false,
 	layers: [streets]
-}).setView([43.732249, 7.413752], 80);
+}).setView([41.145767, -98.439308], 4);
 // Add the base maps as layers
 L.control.layers({
     "Grayscale": grayscale,
@@ -105,11 +105,11 @@ function callIPifyAPI(value, searchType = "ip") {
             // Render data to the appropriate label
             document.querySelector("#ipAddress").innerHTML = data.ip;
             document.querySelector("#location").innerHTML = data.location.city + ", " + data.location.region + " " + data.location.postalCode;
-            document.querySelector("#timezone").innerHTML = data.location.timezone;
+            document.querySelector("#timezone").innerHTML = "UTC" + data.location.timezone;
             document.querySelector("#isp").innerHTML = data.isp;
 
             // Move map to new location using lat, long coordinates
-            mymap.setView([lat, lng], 80);
+            mymap.setView([lat, lng], 15);
             // CustomMarker will be undefined at first page load
             if (customMarker != null) {
                 // Remove marker from map
@@ -142,7 +142,7 @@ function userLocationGranted(position) {
             return response.json();
         })
         .then(data => {
-            searchInput.value = data.ip;
+            // searchInput.value = data.ip;
             callIPifyAPI(data.ip);
         });
 }
