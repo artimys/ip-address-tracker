@@ -9,8 +9,13 @@ const searchInput = document.querySelector("#search");
 
 
 /*******************************************
- * SETUP LEAFLET MAP
+ * SETUP LEAFLET/MAPBOX MAP
  * *****************************************/
+
+let mapboxURL = "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
+let grayscale = L.tileLayer(mapboxURL, {id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, attribution: ""}),
+    streets   = L.tileLayer(mapboxURL, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: ""}),
+    satellite = L.tileLayer(mapboxURL, {id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: ""});
 
 // Store marker object when adding/removing from map
 let customMarker;
@@ -23,18 +28,15 @@ let blackLocationMarker = L.icon({
 });
 
 // Create the map
-let mymap = L.map('mapid', { zoomControl: false }).setView([43.732249, 7.413752], 80);
-
-// Set the map tiles from Mapbox
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    // attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-        // '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        // 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox/streets-v11',
-    // id: 'mapbox/satellite-v9',
-    tileSize: 512,
-    zoomOffset: -1
+let mymap = L.map('mapid', {
+    zoomControl: false,
+	layers: [streets]
+}).setView([43.732249, 7.413752], 80);
+// Add the base maps as layers
+L.control.layers({
+    "Grayscale": grayscale,
+    "Streets": streets,
+    "Satellite": satellite
 }).addTo(mymap);
 
 
@@ -61,6 +63,7 @@ function searchTracker(event) {
 
 searchForm.addEventListener("submit", searchTracker);
 searchButton.addEventListener("click", searchTracker);
+
 
 
 /*******************************************
