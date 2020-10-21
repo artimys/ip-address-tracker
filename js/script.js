@@ -21,7 +21,7 @@ let customMarker;
 
 // Create custom icon for marker
 let blackLocationMarker = L.icon({
-    iconUrl: '../images/icon-location.svg',
+    iconUrl: 'images/icon-location.svg',
     iconSize:     [46, 56], // size of the icon
     iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
 });
