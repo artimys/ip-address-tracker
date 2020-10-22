@@ -3,7 +3,6 @@
  * *****************************************/
 
 const searchForm = document.querySelector("form");
-const searchButton = document.querySelector("button");
 const searchInput = document.querySelector("#search");
 
 
@@ -63,7 +62,6 @@ function searchTracker(event) {
 }
 
 searchForm.addEventListener("submit", searchTracker);
-searchButton.addEventListener("click", searchTracker);
 
 
 
