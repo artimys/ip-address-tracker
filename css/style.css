@@ -17,7 +17,7 @@ body {
 
 h1 {
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 500;
   color: #fff;
   text-align: center;
 }
@@ -35,7 +35,7 @@ COMPONENTS
 .search-bar__input, .search-bar__button {
   border: 1px solid #2b2b2b;
   border-radius: 10px;
-  padding: 1em 1.5em;
+  padding: 1.2em 1.7em;
 }
 
 .search-bar__input {
@@ -204,8 +204,8 @@ DESKTOP
   .result-card__value {
     font-size: 1.4rem;
   }
-  main.results ul {
-    top: -50px;
+  header {
+    min-height: 260px;
   }
 }
 /*# sourceMappingURL=style.css.map */
