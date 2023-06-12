@@ -11,10 +11,12 @@ const searchInput = document.querySelector("#search");
  * SETUP LEAFLET/MAPBOX MAP
  * *****************************************/
 
-let mapboxURL = "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
-let grayscale = L.tileLayer(mapboxURL, {id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, attribution: ""}),
-    streets   = L.tileLayer(mapboxURL, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: ""}),
-    satellite = L.tileLayer(mapboxURL, {id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: ""});
+// const mapURL = "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
+const mapURL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+const mapAttribution = "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>";
+let grayscale = L.tileLayer(mapURL, {id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, attribution: mapAttribution}),
+    streets   = L.tileLayer(mapURL, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: mapAttribution}),
+    satellite = L.tileLayer(mapURL, {id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: mapAttribution});
 
 // Store marker object when adding/removing from map
 let customMarker;
